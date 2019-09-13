@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RequsersService } from '../../services/requsers.service';
 
 @Component({
   selector: 'app-password',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PasswordComponent implements OnInit {
 
-  constructor() { }
+  constructor( private requsersService: RequsersService ) {
+   // this.getUsers();
+   }
 
   ngOnInit() {
+  }
+
+  getUsers() {
+    this.requsersService.getUsers()
+    .subscribe((res: any) => {
+      console.log(res);
+    }, (err) => {
+      console.log(err);
+    });
   }
 
 }

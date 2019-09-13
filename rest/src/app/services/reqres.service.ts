@@ -12,5 +12,3 @@ export class ReqresService {
     return this.http.get('https://reqres.in/api/users');
   }
 }
-
-

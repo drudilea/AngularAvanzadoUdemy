@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PasswordComponent } from './components/password/password.component';
 import { ToAsteriskPipe } from './pipes/to-asterisk.pipe';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -11,7 +12,8 @@ import { ToAsteriskPipe } from './pipes/to-asterisk.pipe';
     ToAsteriskPipe
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule
   ],
   exports: [
     PasswordComponent,
