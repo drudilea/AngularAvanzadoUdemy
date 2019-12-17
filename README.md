@@ -1,2 +1,2 @@
-# labs
-Proyectos de prácticas Angular
+# Angular Avanzado
+Curso práctica Angular Avanzado
