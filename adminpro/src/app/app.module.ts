@@ -1,8 +1,10 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 
 // Modulos
 import { PagesModule } from "./pages/pages.module";
+import { ChartsModule } from "ng2-charts";
 
 // Rutas
 import { APP_ROUTES } from "./app.routes";
@@ -13,7 +15,6 @@ import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./login/register.component";
 
 // Temporal
-import { FormsModule } from "@angular/forms";
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, RegisterComponent],
