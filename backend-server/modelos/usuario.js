@@ -1,7 +1,13 @@
 var mongoose = require('mongoose');
+var uniqueValidator = require('mongoose-unique-validator');
 
 // Defino una funcion de mongoose que me permite crear esquemas
 var Schema = mongoose.Schema;
+
+var rolesValidos = {
+  values: ['ADMIN_ROLE', 'USER_ROLE'],
+  message: '{VALUE} no es un rol permitido'
+};
 
 var usuarioSchema = new Schema({
   nombre: { type: String, required: [true, 'El nombre es necesario'] },
@@ -12,8 +18,15 @@ var usuarioSchema = new Schema({
   },
   password: { type: String, required: [true, 'La contraseña es necesaria'] },
   img: { type: String, required: false },
-  role: { type: String, required: false, default: 'USER_ROLE' }
+  role: {
+    type: String,
+    required: false,
+    default: 'USER_ROLE',
+    enum: rolesValidos
+  }
 });
+
+usuarioSchema.plugin(uniqueValidator, { message: '{PATH} debe ser único' });
 
 // Exporto el esquema para poder utilizarlo en otras partes
 module.exports = mongoose.model('Usuario', usuarioSchema);

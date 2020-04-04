@@ -1,9 +1,15 @@
 // Requires (importacion de librerias)
 var express = require('express');
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
 
 // Inicializar variables
 var app = express();
+
+// Body Parser (middleware para parsear el body en los POST)
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Importar rutas
 var appRoutes = require('./routes/app');
