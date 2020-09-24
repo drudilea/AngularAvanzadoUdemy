@@ -4,24 +4,32 @@ import { FormsModule } from "@angular/forms";
 
 // Modulos
 import { PagesModule } from "./pages/pages.module";
+import { AuthModule } from "./auth/auth.module";
 
 // Rutas
-import { APP_ROUTES } from "./app.routes";
+import { AppRoutingModule } from "./app-routing.module";
+import { AuthRoutingModule } from "./auth/auth.routing";
 
 // Componentes
 import { AppComponent } from "./app.component";
-import { LoginComponent } from "./login/login.component";
-import { RegisterComponent } from "./login/register.component";
 
 // Servicios
 import { ServiceModule } from "./services/service.module";
+import { NopagefoundComponent } from "./nopagefound/nopagefound.component";
 
 // Temporal
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, RegisterComponent],
-  imports: [BrowserModule, APP_ROUTES, PagesModule, FormsModule, ServiceModule],
+  declarations: [AppComponent, NopagefoundComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    AuthModule,
+    PagesModule,
+    FormsModule,
+    ServiceModule,
+  ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

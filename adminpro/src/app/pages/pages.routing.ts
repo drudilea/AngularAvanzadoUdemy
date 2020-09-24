@@ -1,4 +1,5 @@
-import { Routes, RouterModule } from "@angular/router";
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
 
 import { PagesComponent } from "./pages.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
@@ -8,40 +9,43 @@ import { AccountSettingsComponent } from "./account-settings/account-settings.co
 import { PromesasComponent } from "./promesas/promesas.component";
 import { RxjsComponent } from "./rxjs/rxjs.component";
 
-const pagesRoutes: Routes = [
+const routes: Routes = [
   {
-    path: "",
+    path: "dashboard",
     component: PagesComponent,
     children: [
       {
-        path: "dashboard",
+        path: "",
         component: DashboardComponent,
-        data: { titulo: "Dashboard" }
+        data: { titulo: "Dashboard" },
       },
       {
         path: "progress",
         component: ProgressComponent,
-        data: { titulo: "Progress" }
+        data: { titulo: "Progress" },
       },
       {
         path: "graficas1",
         component: Graficas1Component,
-        data: { titulo: "Graficas" }
+        data: { titulo: "Graficas" },
       },
       {
         path: "promesas",
         component: PromesasComponent,
-        data: { titulo: "Promesas" }
+        data: { titulo: "Promesas" },
       },
       { path: "rxjs", component: RxjsComponent, data: { titulo: "RxJs" } },
       {
         path: "account-settings",
         component: AccountSettingsComponent,
-        data: { titulo: "Ajustes del tema" }
+        data: { titulo: "Ajustes del tema" },
       },
-      { path: "", redirectTo: "/dashboard", pathMatch: "full" }
-    ]
-  }
+    ],
+  },
 ];
 
-export const PAGES_ROUTES = RouterModule.forChild(pagesRoutes);
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+})
+export class PagesRoutingModule {}

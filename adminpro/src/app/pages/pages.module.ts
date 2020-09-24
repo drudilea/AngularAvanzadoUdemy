@@ -13,7 +13,7 @@ import { AccountSettingsComponent } from "./account-settings/account-settings.co
 import { PromesasComponent } from "./promesas/promesas.component";
 
 // Rutas
-import { PAGES_ROUTES } from "./pages.routes";
+import { PagesRoutingModule } from "./pages.routing";
 
 import { IncrementadorComponent } from "../components/incrementador/incrementador.component";
 import { GraficaDonaComponent } from "../components/grafica-dona/grafica-dona.component";
@@ -30,9 +30,9 @@ import { RxjsComponent } from "./rxjs/rxjs.component";
     GraficaDonaComponent,
     AccountSettingsComponent,
     PromesasComponent,
-    RxjsComponent
+    RxjsComponent,
   ],
   exports: [DashboardComponent, ProgressComponent, Graficas1Component],
-  imports: [SharedModule, PAGES_ROUTES, FormsModule, ChartsModule]
+  imports: [SharedModule, PagesRoutingModule, FormsModule, ChartsModule],
 })
 export class PagesModule {}

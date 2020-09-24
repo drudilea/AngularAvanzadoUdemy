@@ -9,7 +9,7 @@ var rolesValidos = {
   message: '{VALUE} no es un rol permitido',
 };
 
-var usuarioSchema = new Schema({
+var hospitalSchema = new Schema({
   nombre: { type: String, required: [true, 'El nombre es necesario'] },
   email: {
     type: String,
@@ -26,7 +26,7 @@ var usuarioSchema = new Schema({
   },
 });
 
-usuarioSchema.plugin(uniqueValidator, { message: '{PATH} debe ser único' });
+hospitalSchema.plugin(uniqueValidator, { message: '{PATH} debe ser único' });
 
 // Exporto el esquema para poder utilizarlo en otras partes
-module.exports = mongoose.model('Usuario', usuarioSchema);
+module.exports = mongoose.model('Usuario', hospitalSchema);
