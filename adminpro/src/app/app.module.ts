@@ -16,12 +16,14 @@ import { AppComponent } from "./app.component";
 // Servicios
 import { ServiceModule } from "./services/service.module";
 import { NopagefoundComponent } from "./nopagefound/nopagefound.component";
+import { CommonModule } from "@angular/common";
 
 // Temporal
 
 @NgModule({
   declarations: [AppComponent, NopagefoundComponent],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     AuthModule,

@@ -1,39 +1,35 @@
 // Requires (importacion de librerias)
-var express = require('express');
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
+require('dotenv').config();
+
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
+const { dbConnection } = require('./database/config');
 
 // Inicializar variables
 var app = express();
+
+// Configurar CORS
+app.use(cors());
+
+// Lectura y parseo del body
+app.use(express.json());
 
 // Body Parser (middleware para parsear el body en los POST)
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// Importar rutas
-var appRoutes = require('./routes/app');
-var usuarioRoutes = require('./routes/usuario');
-var loginRoutes = require('./routes/login');
-
 // Conexion a la base de datos
-mongoose.connection.openUri(
-  'mongodb://localhost:27017/hospitalDB',
-  (err, res) => {
-    // En caso que suceda un error se detiene todo el proceso
-    if (err) throw err;
-
-    console.log('Base de datos  \x1b[32m%s\x1b[0m', 'online');
-  }
-);
+dbConnection();
 
 // Rutas
-app.use('/login', loginRoutes);
-app.use('/usuario', usuarioRoutes);
-app.use('/', appRoutes);
+app.use('/api/usuarios', require('./routes/usuarios'));
+app.use('/api/login', require('./routes/auth'));
 
 // Escuchar peticiones en un puerto determinado
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
   // Agrego color a la palabra para diferenciarlas
-  console.log('Express server puerto 3000: \x1b[32m%s\x1b[0m', 'online');
+  console.log(`Express server puerto ${process.env.PORT}: online`);
 });

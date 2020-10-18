@@ -1,25 +1,26 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { ChartType } from "chart.js";
-import { MultiDataSet, Label } from "ng2-charts";
+import { MultiDataSet, Label, Color } from "ng2-charts";
 
 @Component({
   selector: "app-grafica-dona",
   templateUrl: "./grafica-dona.component.html",
-  styles: []
+  styles: [],
 })
-export class GraficaDonaComponent implements OnInit {
+export class GraficaDonaComponent {
   @Input("chartLabels") doughnutChartLabels: Label[];
   @Input("chartData") doughnutChartData: MultiDataSet;
   @Input("chartType") doughnutChartType: ChartType;
+  @Input("chartColors") doughnutChartColors: Color[] = [
+    { backgroundColor: ["#9E120E", "#FF5800", "#FFB414"] },
+  ];
 
   constructor() {}
-
-  ngOnInit() {}
 
   // Events
   public chartClicked({
     event,
-    active
+    active,
   }: {
     event: MouseEvent;
     active: {}[];
@@ -29,7 +30,7 @@ export class GraficaDonaComponent implements OnInit {
 
   public chartHovered({
     event,
-    active
+    active,
   }: {
     event: MouseEvent;
     active: {}[];

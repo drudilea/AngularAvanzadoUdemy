@@ -3,3 +3,4 @@ files/
 backend-server/node_modules/Z
 recursos
 node_modules
+.env

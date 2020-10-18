@@ -5,25 +5,28 @@ import {
   Output,
   EventEmitter,
   ViewChild,
-  ElementRef
+  ElementRef,
 } from "@angular/core";
 
 @Component({
   selector: "app-incrementador",
   templateUrl: "./incrementador.component.html",
-  styles: []
+  styles: [],
 })
 export class IncrementadorComponent implements OnInit {
   @ViewChild("txtProgress", { static: true }) txtProgress: ElementRef;
 
   @Input() progreso: number;
   @Input("nombre") leyenda: string;
+  @Input() btnClass: string = "btn-primary";
 
   @Output() cambioValor: EventEmitter<number> = new EventEmitter();
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.btnClass = `btn ${this.btnClass}`;
+  }
 
   cambiarValor(valor: number) {
     if (this.progreso >= 100 && valor > 0) {
