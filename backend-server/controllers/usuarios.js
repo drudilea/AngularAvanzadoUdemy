@@ -4,23 +4,19 @@ const Usuario = require('../models/usuario');
 const { generarJWT } = require('../helpers/jwt');
 
 const getUsuarios = async (req, res, next) => {
-  const usuarios = await Usuario.find({}, 'nombre email img role google').exec(
-    (err, usuarios) => {
-      if (err) {
-        return res.status(500).json({
-          ok: false,
-          mensaje: 'Error cargando usuarios',
-          errors: err,
-        });
-      }
+  const desde = Number(req.query.desde) || 0;
 
-      res.status(200).json({
-        ok: true,
-        usuarios,
-        uid: req.uid,
-      });
-    }
-  );
+  const [usuarios, total] = await Promise.all([
+    Usuario.find({}, 'nombre email img role google').skip(desde).limit(5),
+    Usuario.countDocuments(),
+  ]);
+
+  res.json({
+    ok: true,
+    usuarios,
+    uid: req.uid,
+    total,
+  });
 };
 
 const crearUsuario = async (req, res = response) => {
