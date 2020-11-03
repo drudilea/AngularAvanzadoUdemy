@@ -23,7 +23,16 @@ router.get('/', getMedicos);
 // ====================================
 // Actualizar medico
 // ====================================
-router.put('/:id', [], actualizarMedico);
+router.put(
+  '/:id',
+  [
+    validarJWT,
+    check('nombre', 'El nombre del medico es obligatorio').notEmpty(),
+    check('hospital', 'El hospital id debe ser valido').isMongoId(),
+    validarCampos,
+  ],
+  actualizarMedico
+);
 
 // ====================================
 // Crear un nuevo medico

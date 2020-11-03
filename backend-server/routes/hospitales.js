@@ -23,7 +23,15 @@ router.get('/', getHospitales);
 // ====================================
 // Actualizar hospital
 // ====================================
-router.put('/:id', [validarJWT], actualizarHospital);
+router.put(
+  '/:id',
+  [
+    validarJWT,
+    check('nombre', 'El nombre del hospital es obligatorio').notEmpty(),
+    validarCampos,
+  ],
+  actualizarHospital
+);
 
 // ====================================
 // Crear un nuevo hospital
@@ -41,6 +49,6 @@ router.post(
 // ====================================
 // Eliminar un hospital por id
 // ====================================
-router.delete('/:id', eliminarHospital);
+router.delete('/:id', validarJWT, eliminarHospital);
 
 module.exports = router;

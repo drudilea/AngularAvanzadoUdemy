@@ -1,7 +1,6 @@
 const { response } = require('express');
-const bcrypt = require('bcryptjs');
-const { generarJWT } = require('../helpers/jwt');
 const Medico = require('../models/medico');
+const Hospital = require('../models/hospital');
 
 const getMedicos = async (req, res, next) => {
   const medicos = await Medico.find()
@@ -36,10 +35,42 @@ const crearMedico = async (req, res = response) => {
 };
 
 const actualizarMedico = async (req, res = response) => {
+  const id = req.params.id;
+  const uid = req.uid;
+  const hid = req.body.hospital;
+
   try {
+    const medicoDB = await Medico.findById(id);
+    if (!medicoDB) {
+      return res.status(404).json({
+        ok: false,
+        mensaje: 'No existe un médico con ese id',
+      });
+    }
+
+    const hospitalDB = await Hospital.findById(hid);
+    if (!hospitalDB) {
+      return res.status(404).json({
+        ok: false,
+        mensaje: 'No existe un hospital con ese id',
+      });
+    }
+
+    const cambiosMedico = {
+      ...req.body,
+      usuario: uid,
+    };
+
+    // Actualizo el medico en la base de datos
+    const medicoActualizado = await Medico.findByIdAndUpdate(
+      id,
+      cambiosMedico,
+      { new: true }
+    );
+
     res.json({
       ok: true,
-      mensaje: 'Medico UPDATE',
+      medico: medicoActualizado,
     });
   } catch (error) {
     console.log(error);
@@ -51,10 +82,23 @@ const actualizarMedico = async (req, res = response) => {
 };
 
 const eliminarMedico = async (req, res = response) => {
+  const id = req.params.id;
+
   try {
+    const medicoDB = await Medico.findById(id);
+    if (!medicoDB) {
+      return res.status(404).json({
+        ok: false,
+        mensaje: 'No existe un médico con ese id',
+      });
+    }
+
+    // Elimino el médico de la base de datos
+    await Medico.findByIdAndDelete(id);
+
     res.json({
       ok: true,
-      mensaje: 'Medico DELETE',
+      mensaje: 'El médico ha sido eliminado correctamente',
     });
   } catch (error) {
     console.log(error);
