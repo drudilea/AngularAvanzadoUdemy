@@ -8,7 +8,6 @@ import { AuthModule } from "./auth/auth.module";
 
 // Rutas
 import { AppRoutingModule } from "./app-routing.module";
-import { AuthRoutingModule } from "./auth/auth.routing";
 
 // Componentes
 import { AppComponent } from "./app.component";

@@ -5,8 +5,8 @@ import { RouterModule, Routes } from "@angular/router";
 import { NopagefoundComponent } from "./nopagefound/nopagefound.component";
 
 // Modulos
-import { PagesRoutingModule } from "./pages/pages.routing";
-import { AuthRoutingModule } from "./auth/auth.routing";
+import { PagesRoutingModule } from "./pages/pages-routing.module";
+import { AuthRoutingModule } from "./auth/auth-routing.module";
 
 const routes: Routes = [
   { path: "", redirectTo: "/dashboard", pathMatch: "full" },

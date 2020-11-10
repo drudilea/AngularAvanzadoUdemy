@@ -15,7 +15,7 @@ import { PromesasComponent } from "./promesas/promesas.component";
 import { RxjsComponent } from "./rxjs/rxjs.component";
 
 // Rutas
-import { PagesRoutingModule } from "./pages.routing";
+import { PagesRoutingModule } from "./pages-routing.module";
 
 // Temporal
 

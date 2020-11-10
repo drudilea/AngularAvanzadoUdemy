@@ -1,13 +1,18 @@
-import { Component, OnInit } from "@angular/core";
-import { SidebarService } from "../../services/service.index";
+import { Component } from "@angular/core";
+import { SidebarService, UsuarioService } from "../../services/service.index";
 
 @Component({
   selector: "app-sidebar",
   templateUrl: "./sidebar.component.html",
-  styles: []
+  styles: [],
 })
-export class SidebarComponent implements OnInit {
-  constructor(public sideBarService: SidebarService) {}
+export class SidebarComponent {
+  constructor(
+    public sideBarService: SidebarService,
+    private usuarioService: UsuarioService
+  ) {}
 
-  ngOnInit() {}
+  logout() {
+    this.usuarioService.logout();
+  }
 }

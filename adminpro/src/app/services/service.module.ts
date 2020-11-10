@@ -3,12 +3,13 @@ import { CommonModule } from "@angular/common";
 import {
   SettingsService,
   SidebarService,
-  SharedService
+  SharedService,
+  UsuarioService,
 } from "./service.index";
 
 @NgModule({
   declarations: [],
   imports: [CommonModule],
-  providers: [SettingsService, SidebarService, SharedService]
+  providers: [SettingsService, SidebarService, SharedService, UsuarioService],
 })
 export class ServiceModule {}
