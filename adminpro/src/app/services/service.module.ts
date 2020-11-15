@@ -3,13 +3,18 @@ import { CommonModule } from "@angular/common";
 import {
   SettingsService,
   SidebarService,
-  SharedService,
   UsuarioService,
 } from "./service.index";
+import { UploadFilesService } from "./files/upload-files.service";
 
 @NgModule({
   declarations: [],
   imports: [CommonModule],
-  providers: [SettingsService, SidebarService, SharedService, UsuarioService],
+  providers: [
+    SettingsService,
+    SidebarService,
+    UsuarioService,
+    UploadFilesService,
+  ],
 })
 export class ServiceModule {}

@@ -1,7 +1,7 @@
 files/
 .vscode/
 backend-server/node_modules/Z
-recursos
+resources
 node_modules
 .env
 backend-server/uploads/

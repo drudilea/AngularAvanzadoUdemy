@@ -2,7 +2,6 @@
 require('dotenv').config();
 
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const { dbConnection } = require('./database/config');
@@ -15,11 +14,6 @@ app.use(cors());
 
 // Lectura y parseo del body
 app.use(express.json());
-
-// Body Parser (middleware para parsear el body en los POST)
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 
 // Conexion a la base de datos
 dbConnection();
