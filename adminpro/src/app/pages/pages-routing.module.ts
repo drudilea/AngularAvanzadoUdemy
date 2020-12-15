@@ -11,6 +11,9 @@ import { RxjsComponent } from "./rxjs/rxjs.component";
 import { AuthGuard } from "../guards/auth.guard";
 import { PerfilComponent } from "./perfil/perfil.component";
 
+// Mantenimientos
+import { UsuariosComponent } from "./mantenimientos/usuarios/usuarios.component";
+
 const routes: Routes = [
   {
     path: "dashboard",
@@ -48,6 +51,23 @@ const routes: Routes = [
         component: AccountSettingsComponent,
         data: { titulo: "Ajustes del tema" },
       },
+
+      // Mantenimientos
+      {
+        path: "usuarios",
+        component: UsuariosComponent,
+        data: { titulo: "Usuarios de la aplicación" },
+      },
+      // {
+      //   path: "medicos",
+      //   component: MedicosComponent,
+      //   data: { titulo: "Médicos de la aplicación" },
+      // },
+      // {
+      //   path: "hospitales",
+      //   component: HospitalesComponent,
+      //   data: { titulo: "Hospitales de la aplicación" },
+      // },
     ],
   },
 ];

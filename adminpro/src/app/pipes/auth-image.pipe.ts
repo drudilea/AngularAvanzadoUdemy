@@ -8,7 +8,7 @@ export class AuthImagePipe implements PipeTransform {
   constructor(private http: HttpClient) {}
 
   async transform(src: string): Promise<string> {
-    if (src.includes("https")) {
+    if (src && src.includes("https")) {
       return src;
     }
 

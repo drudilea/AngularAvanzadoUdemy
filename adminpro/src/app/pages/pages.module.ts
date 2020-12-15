@@ -19,6 +19,7 @@ import { PerfilComponent } from "./perfil/perfil.component";
 
 // Rutas
 import { PagesRoutingModule } from "./pages-routing.module";
+import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
 
 // Temporal
 
@@ -32,6 +33,7 @@ import { PagesRoutingModule } from "./pages-routing.module";
     PromesasComponent,
     RxjsComponent,
     PerfilComponent,
+    UsuariosComponent,
   ],
   exports: [DashboardComponent, ProgressComponent, Graficas1Component],
   imports: [
