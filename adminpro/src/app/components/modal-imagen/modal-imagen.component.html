@@ -56,7 +56,12 @@
           >
             Cancelar
           </button>
-          <button type="button" class="btn btn-primary" (click)="uploadImage()">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="uploadImage()"
+            [disabled]="!imageTemp || !imageToUpload"
+          >
             Cambiar imagen
           </button>
         </div>

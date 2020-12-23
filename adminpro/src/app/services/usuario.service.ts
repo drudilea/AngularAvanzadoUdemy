@@ -55,7 +55,7 @@ export class UsuarioService {
             "92260652024-j99d87g8kqo7mp63nme3bcnfphji2kas.apps.googleusercontent.com",
           cookiepolicy: "single_host_origin",
         });
-        resolve();
+        resolve(this.auth2);
       });
     });
   }

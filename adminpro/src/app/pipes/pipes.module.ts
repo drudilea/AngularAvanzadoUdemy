@@ -1,10 +1,10 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
+
 import { AuthImagePipe } from "./auth-image.pipe";
+import { ImageBuilderPipe } from "./image-builder.pipe";
 
 @NgModule({
-  declarations: [AuthImagePipe],
-  imports: [CommonModule],
-  exports: [AuthImagePipe],
+  declarations: [AuthImagePipe, ImageBuilderPipe],
+  exports: [AuthImagePipe, ImageBuilderPipe],
 })
 export class PipesModule {}

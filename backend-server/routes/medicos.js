@@ -8,6 +8,7 @@ const { validarCampos } = require('../middlewares/validar-campos.js');
 const { validarJWT } = require('../middlewares/validar-jwt.js');
 const {
   getMedicos,
+  getMedicoById,
   crearMedico,
   actualizarMedico,
   eliminarMedico,
@@ -18,7 +19,7 @@ const router = Router();
 // ====================================
 // Obtener todos los medicos
 // ====================================
-router.get('/', getMedicos);
+router.get('/', validarJWT, getMedicos);
 
 // ====================================
 // Actualizar medico
@@ -51,6 +52,11 @@ router.post(
 // ====================================
 // Eliminar un medico por id
 // ====================================
-router.delete('/:id', eliminarMedico);
+router.delete('/:id', validarJWT, eliminarMedico);
+
+// ====================================
+// Obtener un médico por id
+// ====================================
+router.get('/:id', validarJWT, getMedicoById);
 
 module.exports = router;
