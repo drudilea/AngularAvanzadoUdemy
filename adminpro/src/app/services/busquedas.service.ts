@@ -28,6 +28,12 @@ export class BusquedasService {
     };
   }
 
+  globalSearch(termino: string) {
+    const url = `${base_url}/todo/${termino}`;
+
+    return this.http.get<any[]>(url, this.headers);
+  }
+
   private transformarUsuarios(resultados: any[]): Usuario[] {
     return resultados.map(
       (user) =>
@@ -47,7 +53,7 @@ export class BusquedasService {
     return resultados;
   }
 
-  transformarMedicos(resultados: any[]): Medico[] {
+  private transformarMedicos(resultados: any[]): Medico[] {
     return resultados;
   }
 

@@ -1,4 +1,4 @@
-export { SettingsService } from "./settings/settings.service";
-export { UploadFilesService } from "./files/upload-files.service";
-export { SidebarService } from "./shared/sidebar.service";
+export { SettingsService } from "./settings.service";
+export { UploadFilesService } from "./upload-files.service";
+export { SidebarService } from "./sidebar.service";
 export { UsuarioService } from "./usuario.service";

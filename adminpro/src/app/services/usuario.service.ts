@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { Observable, of } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
+import Swal from "sweetalert2";
 
 import { environment } from "src/environments/environment";
 
@@ -34,6 +35,10 @@ export class UsuarioService {
     return localStorage.getItem("token") || "";
   }
 
+  get role(): "ADMIN_ROLE" | "USER_ROLE" {
+    return this.usuario.role;
+  }
+
   get uid(): string {
     return this.usuario.uid || "";
   }
@@ -44,6 +49,11 @@ export class UsuarioService {
         "x-token": this.token,
       },
     };
+  }
+
+  private guardarLocalStorage(token: string, menu: any) {
+    localStorage.setItem("token", token);
+    localStorage.setItem("menu", JSON.stringify(menu));
   }
 
   googleInit() {
@@ -65,7 +75,7 @@ export class UsuarioService {
       map((resp: any) => {
         const { email, google, img = "", nombre, role, uid } = resp.usuario;
         this.usuario = new Usuario(nombre, email, uid, "", img, role, google);
-        localStorage.setItem("token", resp.token);
+        this.guardarLocalStorage(resp.token, resp.menu);
         return true;
       }),
       // Devuelvo un Observable con el valor de false
@@ -77,8 +87,12 @@ export class UsuarioService {
   crearUsuario(formData: RegisterForm) {
     return this.http.post(`${base_url}/usuarios`, formData).pipe(
       tap((resp: any) => {
-        localStorage.setItem("token", resp.token);
-      })
+        this.guardarLocalStorage(resp.token, resp.menu);
+        return resp;
+      }),
+      catchError((err) =>
+        of(Swal.fire("Error en registro", err.error.mensaje, "error"))
+      )
     );
   }
 
@@ -98,7 +112,7 @@ export class UsuarioService {
   login(formData: LoginForm) {
     return this.http.post(`${base_url}/login`, formData).pipe(
       tap((resp: any) => {
-        localStorage.setItem("token", resp.token);
+        this.guardarLocalStorage(resp.token, resp.menu);
       })
     );
   }
@@ -106,13 +120,14 @@ export class UsuarioService {
   loginGoogle(token: string) {
     return this.http.post(`${base_url}/login/google`, { token }).pipe(
       tap((resp: any) => {
-        localStorage.setItem("token", resp.token);
+        this.guardarLocalStorage(resp.token, resp.menu);
       })
     );
   }
 
   logout() {
     localStorage.removeItem("token");
+    localStorage.removeItem("menu");
     this.auth2.signOut().then(() => {
       this.ngZone.run(() => {
         this.router.navigateByUrl("/login");

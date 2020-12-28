@@ -5,7 +5,10 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos.js');
-const { validarJWT } = require('../middlewares/validar-jwt.js');
+const {
+  validarJWT,
+  validarAdminRole,
+} = require('../middlewares/validar-jwt.js');
 const {
   getHospitales,
   crearHospital,
@@ -27,6 +30,7 @@ router.put(
   '/:id',
   [
     validarJWT,
+    validarAdminRole,
     check('nombre', 'El nombre del hospital es obligatorio').notEmpty(),
     validarCampos,
   ],
@@ -40,6 +44,7 @@ router.post(
   '/',
   [
     validarJWT,
+    validarAdminRole,
     check('nombre', 'El nombre del hospital es obligatorio').notEmpty(),
     validarCampos,
   ],
@@ -49,6 +54,6 @@ router.post(
 // ====================================
 // Eliminar un hospital por id
 // ====================================
-router.delete('/:id', validarJWT, eliminarHospital);
+router.delete('/:id', [validarJWT, validarAdminRole], eliminarHospital);
 
 module.exports = router;

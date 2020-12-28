@@ -23,8 +23,9 @@
                       | authImage
                       | async
                   "
-                  alt=""
-                  class="w200"
+                  [alt]="medicoSeleccionado.nombre"
+                  class="w200 cursor"
+                  (click)="openImageModal(medicoSeleccionado)"
                 />
               </div>
             </div>

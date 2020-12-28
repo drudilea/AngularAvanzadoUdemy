@@ -5,7 +5,7 @@ import {
   SidebarService,
   UsuarioService,
 } from "./service.index";
-import { UploadFilesService } from "./files/upload-files.service";
+import { UploadFilesService } from "./upload-files.service";
 
 @NgModule({
   declarations: [],

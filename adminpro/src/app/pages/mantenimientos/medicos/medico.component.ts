@@ -1,6 +1,8 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { Subscription } from "rxjs";
+import { delay } from "rxjs/operators";
 import Swal from "sweetalert2";
 
 import { Hospital } from "src/app/models/hospital.model";
@@ -8,26 +10,29 @@ import { Medico } from "src/app/models/medico.model";
 
 import { HospitalService } from "src/app/services/hospital.service";
 import { MedicoService } from "src/app/services/medico.service";
-import { delay } from "rxjs/operators";
+import { ModalImagenService } from "src/app/services/modal-imagen.service";
 
 @Component({
   selector: "app-medico",
   templateUrl: "./medico.component.html",
   styles: [],
 })
-export class MedicoComponent implements OnInit {
+export class MedicoComponent implements OnInit, OnDestroy {
   public medicoForm: FormGroup;
   public hospitales: Hospital[] = [];
 
   public medicoSeleccionado: Medico;
   public hospitalSeleccionado: Hospital;
 
+  private imgSubs: Subscription;
+
   constructor(
     private fb: FormBuilder,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
     private hospitalService: HospitalService,
     private medicoService: MedicoService,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
+    private modalImagenService: ModalImagenService
   ) {}
 
   ngOnInit(): void {
@@ -47,10 +52,21 @@ export class MedicoComponent implements OnInit {
       });
 
     this.activatedRoute.params.subscribe(({ id }) => this.cargarMedico(id));
+
+    this.imgSubs = this.modalImagenService.nuevaImagen
+      .pipe(delay(500))
+      .subscribe((img) => {
+        // Recargo la imagen cuando es cambiada
+        this.cargarMedico(this.medicoSeleccionado._id);
+      });
+  }
+
+  ngOnDestroy() {
+    this.imgSubs.unsubscribe();
   }
 
   private cargarMedico(id: string) {
-    if (id === "nuevo") {
+    if (id === "nuevo" || !id) {
       return;
     }
 
@@ -112,5 +128,9 @@ export class MedicoComponent implements OnInit {
           this.router.navigateByUrl(`/dashboard/medico/${resp.medico._id}`);
         });
     }
+  }
+
+  openImageModal(medico: Medico) {
+    this.modalImagenService.abrirModal("medicos", medico._id, medico.img);
   }
 }
