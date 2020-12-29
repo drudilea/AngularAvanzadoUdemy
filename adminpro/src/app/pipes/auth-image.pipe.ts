@@ -25,7 +25,7 @@ export class AuthImagePipe implements PipeTransform {
         reader.readAsDataURL(imageBlob);
       });
     } catch {
-      return "assets/images/no-img.jpg";
+      return "assets/images/no-image.jpg";
     }
   }
 }

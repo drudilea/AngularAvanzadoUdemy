@@ -22,7 +22,6 @@ export class Usuario {
       return `${base_url}/uploads/usuarios/${this.img}`;
     } else {
       return `${base_url}/uploads/usuarios/no-image`;
-      // return "assets/images/no-img.jpg";
     }
   }
 }
