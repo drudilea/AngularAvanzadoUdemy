@@ -27,9 +27,7 @@
               <tr *ngFor="let usuario of usuarios" class="animated fadeIn fast">
                 <td>
                   <img
-                    [src]="
-                      usuario.img | imageBuilder: 'usuarios' | authImage | async
-                    "
+                    [src]="usuario.img | imageBuilder: 'usuarios'"
                     alt="Avatar de usuario"
                     class="avatar w50"
                   />
@@ -75,9 +73,7 @@
               >
                 <td>
                   <img
-                    [src]="
-                      medico.img | imageBuilder: 'medicos' | authImage | async
-                    "
+                    [src]="medico.img | imageBuilder: 'medicos'"
                     alt="Avatar de medico"
                     class="avatar w50"
                   />
